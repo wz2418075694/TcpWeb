@@ -1,4 +1,4 @@
-package send
+package MD5
 
 import (
 	"crypto/md5"

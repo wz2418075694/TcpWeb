@@ -12,7 +12,7 @@ import (
 	"wepTcpClient/config"
 )
 
-// 接收消息
+// ReFileMessage 接收消息
 func ReFileMessage(conn net.Conn) {
 	//创建接收器
 	reader := bufio.NewReader(conn)
@@ -55,15 +55,16 @@ func ReFileMessage(conn net.Conn) {
 			} else {
 				fmt.Printf("MD5校验失败！ 服务端:[%s] 客户端:[%s]\n", serverMD5, clientMD5)
 			}
-
 			fmt.Println("请输入命令>>>")
+			continue
 
 		}
 		if len(message) >= 3 && message[:3] == "DIR" {
 			PrintIDr(conn)
 			fmt.Println("请输入命令>>>")
-
+			continue
 		}
+		fmt.Println(message)
 
 	}
 
@@ -74,9 +75,7 @@ func ReFileMessage(conn net.Conn) {
 	//
 	//	conn.Read()
 	//	阻塞，将返回的数据放入buf中，n是返回的字节数,
-	//		tcp中有两种情况会返回错误，1.
-	//	网络出错，2.
-	//	服务器断开连接
+	//		tcp中有两种情况会返回错误，1. 网络出错，2. 服务器断开连接
 	//	n, err := conn.Read(buf)
 	//	if err != nil {
 	//		fmt.Println("服务器断开连接！")

@@ -9,12 +9,12 @@ const (
 
 var isDownloading bool = false
 
-// 设置状态
+// SetDownload 设置状态
 func SetDownload(flag bool) {
 	isDownloading = false
 }
 
-// 查看是否正在下载
+// ISDownloading 查看是否正在下载
 func ISDownloading() bool {
 	return isDownloading
 }

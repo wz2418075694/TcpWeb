@@ -22,7 +22,7 @@ func init() {
 
 // 处理单个客户端
 func HandleClient(conn net.Conn) {
-	
+
 	//关闭连接
 	defer conn.Close()
 
@@ -58,6 +58,7 @@ func HandleClient(conn net.Conn) {
 			send.FileCon(conn, filePath)
 			continue
 		}
+		//log.Println("111")
 		_, _ = conn.Write([]byte("请输入正确的命令！\n"))
 	}
 

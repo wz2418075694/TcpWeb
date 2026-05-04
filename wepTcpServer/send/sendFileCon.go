@@ -6,6 +6,7 @@ import (
 	"log"
 	"net"
 	"os"
+	"wepTcpServer/MD5"
 )
 
 //发送文件的步骤
@@ -34,7 +35,7 @@ func FileCon(conn net.Conn, filePath string) {
 	info, _ := file.Stat()
 	fileSize := info.Size()
 	filename := info.Name()
-	MD5, err := GetMD5(filePath)
+	fileMD5, err := MD5.GetMD5(filePath)
 	if err != nil {
 		log.Println(err)
 		return
@@ -43,7 +44,7 @@ func FileCon(conn net.Conn, filePath string) {
 	//3.将这些信息发送给客户端,
 	//fmt.Println(filename)
 	//发送协议头
-	_, err = conn.Write([]byte(fmt.Sprintf("FILE:%s:%d:%s\n", filename, fileSize, MD5)))
+	_, err = conn.Write([]byte(fmt.Sprintf("FILE:%s:%d:%s\n", filename, fileSize, fileMD5)))
 	if err != nil {
 		log.Println("发送协议失败！")
 		return
